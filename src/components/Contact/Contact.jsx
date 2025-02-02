@@ -2,8 +2,12 @@ import s from './Contact.module.css';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { IoPerson } from 'react-icons/io5';
 import { MdDelete } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
 
-const Contact = ({ data: { id, name, number }, onDelete }) => {
+const Contact = ({ data: { id, name, number } }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className={s.contactContainer}>
       <div className={s.contactData}>
@@ -16,7 +20,10 @@ const Contact = ({ data: { id, name, number }, onDelete }) => {
           {number}
         </p>
       </div>
-      <button className={s.contactBtnDelete} onClick={() => onDelete(id)}>
+      <button
+        className={s.contactBtnDelete}
+        onClick={() => dispatch(deleteContact(id))}
+      >
         <MdDelete size="20" />
         Delete
       </button>
